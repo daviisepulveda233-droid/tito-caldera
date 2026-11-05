@@ -1,0 +1,6 @@
+{
+  "name": "Panadería La Espiga Dorada - E-Commerce Supabase",
+  "description": "Tienda online de panadería artesanal con arquitectura en capas (routes, controllers, models), Supabase Auth y base de datos, carrito persistente, stock en backend y panel admin.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

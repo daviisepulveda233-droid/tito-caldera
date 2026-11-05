@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* Paleta simple: crema cálido + terracota. Reemplaza los tonos amber/stone de Tailwind. */
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+
+  /* acento (terracota) */
+  --color-amber-50:  #fdf4ef;
+  --color-amber-100: #fbe7db;
+  --color-amber-200: #f6cdb5;
+  --color-amber-300: #efac86;
+  --color-amber-400: #e68a5b;
+  --color-amber-500: #d96f3f;
+  --color-amber-600: #c25a2d;
+  --color-amber-700: #a14724;
+  --color-amber-800: #82391f;
+  --color-amber-900: #68301d;
+  --color-amber-950: #3a1a10;
+
+  /* neutros (crema y marrón suave) */
+  --color-stone-50:  #fbf8f4;
+  --color-stone-100: #f5efe8;
+  --color-stone-200: #e9e0d4;
+  --color-stone-300: #d6c9b8;
+  --color-stone-400: #a99a88;
+  --color-stone-500: #7f7264;
+  --color-stone-600: #62574b;
+  --color-stone-700: #4a4137;
+  --color-stone-800: #352e27;
+  --color-stone-900: #2a2420;
+  --color-stone-950: #1a1613;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-stone-50);
+  color: var(--color-stone-900);
+  font-family: var(--font-sans);
+}
+
+/* Botones y campos con transiciones suaves */
+button, input, select, textarea { transition: all .15s ease; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+/* Foco accesible y consistente */
+:focus-visible { outline: 2px solid var(--color-amber-500); outline-offset: 2px; }
+
+/* Scroll horizontal de categorías sin barra */
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
