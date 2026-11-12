@@ -2,11 +2,8 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import categoriaRoutes from './server/routes/categoriaRoutes';
-import productoRoutes from './server/routes/productoRoutes';
-import pedidoRoutes from './server/routes/pedidoRoutes';
-import authRoutes from './server/routes/authRoutes';
-import { isSupabaseConfigured, localStore, tablasExistenEnSupabase } from './server/db/supabaseClient';
+import app from './server/app';
+import { isSupabaseConfigured } from './server/db/supabaseClient';
 
 dotenv.config();
 
@@ -14,39 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function startServer() {
-  const app = express();
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-
-  app.use(express.json());
-
-  // Rutas de la API del TP Integrador
-  app.use('/api/categorias', categoriaRoutes);
-  app.use('/api/productos', productoRoutes);
-  app.use('/api/pedidos', pedidoRoutes);
-  app.use('/api/auth', authRoutes);
-
-  // Endpoint de estado y diagnóstico de Supabase
-  app.get('/api/status', (req, res) => {
-    res.json({
-      supabaseConfigurado: isSupabaseConfigured,
-      supabaseUrl: process.env.SUPABASE_URL || 'No configurada',
-      tablasExisten: tablasExistenEnSupabase,
-      rubro: 'Panadería',
-      tienda: 'Micho y Tito',
-      totalProductos: localStore.productos.length,
-      totalCategorias: localStore.categorias.length,
-      modo: isSupabaseConfigured
-        ? (tablasExistenEnSupabase ? 'Conexión Directa Supabase (Tablas Activas)' : 'Supabase Conectado (Falta ejecutar db/esquema.sql en SQL Editor)')
-        : 'Modo Demostración / Servidor Integrado',
-      tiempoServidor: new Date().toISOString(),
-    });
-  });
-
-  // Endpoint para resetear datos de demostración
-  app.post('/api/reset-demo', (req, res) => {
-    localStore.reset();
-    res.json({ mensaje: 'Datos de la panadería restablecidos al estado inicial' });
-  });
 
   // Configuración de Vite para desarrollo y producción
   const isProduction = process.env.NODE_ENV === 'production';
